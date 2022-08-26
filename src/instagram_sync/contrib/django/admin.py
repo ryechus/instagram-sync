@@ -22,14 +22,14 @@ class InstagramAccountAdmin(admin.ModelAdmin):
 
     def add_view(self, request, form_url="", extra_context=None):
         query_string = parse_qs(urlparse(request.get_full_path()).query)
-        app_id = 418459443679300
+        app_id = settings.GRAPH_API_APP_ID
         add_view_url = reverse("admin:instagram_sync_instagramaccount_add")
 
         current_site_domain = get_current_site(request).domain
         protocol = (
             "http://" if current_site_domain.split(":")[0] in ["127.0.0.1", "localhost"] else "https://"
         )
-        redirect_uri = f"{protocol}{current_site_domain}{add_view_url}"
+        redirect_uri = f"{settings.GRAPH_API_REDIRECT_URI}{add_view_url}"
 
         if "code" in query_string and request.method == "GET":
             user_access_token = get_user_access_token(app_id, query_string["code"][0], redirect_uri)

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "instagram-sync"
-version = "0.1.3"
+version = "0.1.7"
 description = ""
 authors = ["MJ Hardin <mhardinla@gmail.com>"]
 
